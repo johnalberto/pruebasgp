@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+
+	<!-- holding properties for database connectivity / -->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+
+	<!-- enabling annotation driven configuration / -->
+	<context:annotation-config />
+
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		
+<!-- 		<property name="hibernate.c3p0.min_size" value="5"/> -->
+<!--         <property name="hibernate.c3p0.max_size" value="20"/> -->
+<!--         <property name="hibernate.c3p0.timeout" value="300"/> -->
+<!--         <property name="hibernate.c3p0.max_statements" value="50"/> -->
+<!--         <property name="hibernate.c3p0.idle_test_period" value="3000"/> -->
+		
+	</bean>
+
+<bean name="test-db" class="org.springframework.jdbc.datasource.DriverManagerDataSource" destroy-method= "finalize">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://192.168.1.4/SGP"/>
+        <property name="username" value="john"/>
+        <property name="password" value="abc123"/>
+<!--         <property name="maxActive" value="5"/> -->
+<!--         <property name="maxIdle" value="3"/> -->
+<!--         <property name="minIdle" value="2"/> -->
+<!--         <property name="maxWait" value="30000"/> -->
+    </bean>
+
+	<bean id="pum"
+		class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
+		<property name="persistenceXmlLocation">
+            
+                <value>classpath*:/META-INF/persistence.xml</value>
+            
+        </property>
+        <property name="defaultDataSource" ref="test-db"/>
+	</bean>
+
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		p:dataSource-ref="dataSource" p:jpaVendorAdapter-ref="jpaAdapter">
+		<property name="loadTimeWeaver">
+			<bean
+				class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver" />
+		</property>
+<!-- 		<property name="persistenceUnitName" value="cidecueroPU" /> -->
+		<property name="persistenceUnitManager" ref="pum" />
+	</bean>
+
+	<bean id="jpaAdapter"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+		p:database="${jpa.database}" p:showSql="${jpa.showSql}" />
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+		p:entityManagerFactory-ref="entityManagerFactory" />
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- Scans the classpath of this application for @Components to deploy as 
+		beans -->
+	<context:component-scan base-package="com.cpcporiente.sgp.springgwtt.pro" />
+
+	<context:annotation-config />
+
+
+	<bean id="localidadServicio" init-method="init"
+		class="com.cpcoriente.sgp.springgwt.pro.server.LocalidadServicioImpl">
+	</bean>
+	<bean id="terceroServicio" init-method="init"
+		class="com.cpcoriente.sgp.springgwt.pro.server.EntidadServicioImpl">
+	</bean>
+	<bean id="permisoServicio" init-method="init"
+		class="com.cpcoriente.sgp.springgwt.pro.server.PermisoServicioImpl">
+	</bean>
+	
+	<bean id="parametroServicio" init-method="init"
+		class="com.cpcoriente.sgp.springgwt.pro.server.ParametroServicioImpl">
+	</bean>
+	<bean id="contabilidadServicio" init-method="init"
+		class="com.cpcoriente.sgp.springgwt.pro.server.ContabilidadServicioImpl">
+	</bean>
+	
+	
+	
+
+	<bean id="paisDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.localidad.jpa.dao.JPAPaisDAO" />
+	<bean id="dptoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.localidad.jpa.dao.JPADepartamentoDAO" />
+	<bean id="ciudadDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.localidad.jpa.dao.JPACiudadDAO" />
+
+
+
+
+	<bean id="entidadDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.entidad.jpa.dao.JPAEntidadDAO" />
+	<bean id="divisionDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.entidad.jpa.dao.JPADivisionDAO" />
+	<bean id="actEconomicaDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.entidad.jpa.dao.JPAActividadEconomicaDAO" />
+	<bean id="terminoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.entidad.jpa.dao.JPATeminoConvocatoriaDAO" />	
+	<bean id="versionTerminoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.entidad.jpa.dao.JPAVersionTeminoConvocatoriaDAO" />
+	<bean id="convocatoriaDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.entidad.jpa.dao.JPAConvocatoriaDAO" />
+		
+		
+		
+	
+	<bean id="usuarioDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.permiso.jpa.dao.JPAUsuarioDAO" />
+	<bean id="usuarioPorTipoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.permiso.jpa.dao.JPAUsuarioPorTipoDAO" />
+	<bean id="usuProEntDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.permiso.jpa.dao.JPAUsuarioProyectoEntidadDAO" />	
+	<bean id="logUsuarioDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.permiso.jpa.dao.JPALogUsuarioDAO" />
+			
+		
+		
+		
+		
+	<bean id="empresaDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.entidad.jpa.dao.JPAEmpresaDAO" />
+	<bean id="proyectoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.proyecto.jpa.dao.JPAProyectoDAO" />
+		
+		
+		
+	<bean id="objetivoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.actividad.jpa.dao.JPAObjetivoDAO" />
+	<bean id="docObjetivoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.actividad.jpa.dao.JPADocObjetivoDAO" />
+	<bean id="productoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.actividad.jpa.dao.JPAProductoDAO" />
+	<bean id="actividadDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.actividad.jpa.dao.JPAActividadDAO" />
+	<bean id="actividadPorPersonalDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.actividad.jpa.dao.JPAActividadPorPersonalDAO" />	
+	<bean id="entregableDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.actividad.jpa.dao.JPAEntregableDAO" />		
+	<bean id="versionObjetivoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.actividad.jpa.dao.JPAVersionObjeticoDAO" />
+	<bean id="varsionProductoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.actividad.jpa.dao.JPAVersionProductoDAO" />
+	<bean id="versionActividadDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.actividad.jpa.dao.JPAVersionActividadDAO" />
+	<bean id="versionEntregableDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.actividad.jpa.dao.JPAVersionEntregableDAO" />	
+		
+		
+		
+	<bean id="calendarioNoLaboralDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.calendario.jpa.dao.JPACalendarioNoLaboralDAO" />	
+	<bean id="diaNoLaboralDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.calendario.jpa.dao.JPADiaNoLaboralDAO" />	
+		
+		
+		
+		
+	<bean id="impuestoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.contabilidad.jpa.dao.JPAImpuestoDAO" />		
+	<bean id="movimientoContableDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.contabilidad.jpa.dao.JPAMovimientoContableDAO" />
+	<bean id="movimientoContableDetalleDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.contabilidad.jpa.dao.JPAMovimientoContableDetalleDAO" />	
+	<bean id="pucDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.contabilidad.jpa.dao.JPAPucDAO" />
+	<bean id="pucPorProyectoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.contabilidad.jpa.dao.JPAPucPorProyectoDAO" />
+		
+		
+		
+		
+	<bean id="ejecucionPresupuestoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.ejecucion.jpa.dao.JPADocEjecucionPresupuestoDAO" />
+	<bean id="docEjecucionPresupuestoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.ejecucion.jpa.dao.JPAEjecucionPresupuestoDAO" />
+		
+
+
+
+    <bean id="docInformeDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.informe.jpa.dao.JPADocInformeDAO" />
+	<bean id="informeDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.informe.jpa.dao.JPAInformeDAO" />
+	<bean id="informeDetalleDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.informe.jpa.dao.JPAInformeDetalleDAO" />	
+	<bean id="infoInterEntregableDetalleDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.informe.jpa.dao.JPAInfoInterEntregableDetalleDAO" />
+	<bean id="infoInterProductoDetalleDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.informe.jpa.dao.JPAInfoInterProductoDetalleDAO" />
+
+
+
+
+
+    <bean id="parametroGeneralDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.parametro.jpa.dao.JPAParametroGeneralDAO" />
+	<bean id="parametroPorProyectoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.parametro.jpa.dao.JPAParametroPorProyectoDAO" />
+
+
+
+
+    <bean id="cargoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.personal.jpa.dao.JPACargoDAO" />
+	<bean id="cargoPorPersonalDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.personal.jpa.dao.JPACargoporPersonalDAO" />
+	<bean id="clausulaTipoContratoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.personal.jpa.dao.JPAClausulaTipoContratoDAO" />
+	<bean id="clausulaContratoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.personal.jpa.dao.JPAClausulaContratoDAO" />
+    <bean id="contratoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.personal.jpa.dao.JPAContratoDAO" />
+	<bean id="docContratoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.personal.jpa.dao.JPADocContratoDAO" />	
+	<bean id="personalDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.personal.jpa.dao.JPAPersonalDAO" />
+    
+
+
+
+
+    <bean id="terceroDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.tercero.jpa.dao.JPATerceroDAO" />
+    <bean id="terceroPorTipoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.tercero.jpa.dao.JPATerceroPorTipoDAO" />
+
+
+
+
+	<bean id="mensajeDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.correspondencia.jpa.dao.JPAMensajeDAO" />
+	<bean id="docMensajeDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.correspondencia.jpa.dao.JPADocMensajeDAO" />	
+	<bean id="destinoMensajeDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.correspondencia.jpa.dao.JPADestinoMensajeDAO" />
+		
+		
+		
+		
+	<bean id="rubroDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.financiero.jpa.dao.JPARubroDAO" />
+	<bean id="rubroProyectoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.financiero.jpa.dao.JPARubroProyectoDAO" />
+	<bean id="recursoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.financiero.jpa.dao.JPARecursoDAO" />	
+	<bean id="recursoDetalleDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.financiero.jpa.dao.JPARecursoDetalleDAO" />
+	<bean id="versionRecursoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.financiero.jpa.dao.JPAVersionRecursoDAO" />	
+	<bean id="unidadDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.financiero.jpa.dao.JPAUnidadDAO" />
+	
+		
+	<bean id="versionProyectoDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.proyecto.jpa.dao.JPAVersionProyectoDAO" />
+	<bean id="proyectoEntidadDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.proyecto.jpa.dao.JPAProyectoEntidadDAO" />
+		
+		
+		
+		
+	<bean id="infInterventorDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.informe.jpa.dao.JPAInformeInterventorDAO" />		
+	<bean id="revIntFinDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.informe.jpa.dao.JPARevInterventorFinDAO" />
+	<bean id="revIntFinDetDao"
+		class="com.cpcoriente.sgp.springgwt.pro.server.informe.jpa.dao.JPARevInterventorFinDetDAO" />	
+
+
+
+
+	<bean id="paisTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.localidad.todo.transfer.PaisTransf" />
+	<bean id="dptoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.localidad.todo.transfer.DepartamentoTransf" />
+	<bean id="ciudadTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.localidad.todo.transfer.CiudadTransf" />
+
+
+
+
+	<bean id="entidadTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.entidad.todo.transfer.EntidadTransf" />
+	<bean id="divisionTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.entidad.todo.transfer.DivisionTransf" />
+	<bean id="actEconomicaTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.entidad.todo.transfer.ActividadEconomicaTransf" />	
+	<bean id="terminoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.entidad.todo.transfer.TerminoConvocatoriaTransf" />	
+	<bean id="versionTerminoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.entidad.todo.transfer.VersionTerminoConvocatoriaTransf" />
+	<bean id="convocatoriaTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.entidad.todo.transfer.ConvocatoriaTransf" />
+		
+
+	
+	
+	<bean id="usuarioPorTipoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.permiso.todo.transfer.UsuarioPorTipoTransf" />
+	<bean id="usuarioTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.permiso.todo.transfer.UsuarioTransf" />
+	<bean id="usuProEntTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.permiso.todo.transfer.UsuarioProyectoEntidadTransf" />
+	<bean id="logUsuarioTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.permiso.todo.transfer.LogUsuarioTransf" />
+		
+		
+		
+	<bean id="empresaTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.empresa.todo.transfer.EmpresaTransf" />
+		
+		
+		
+	<bean id="proyectoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.proyecto.todo.transfer.ProyectoTransf" />
+	<bean id="versionProyectoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.proyecto.todo.transfer.VersionProyectoTransf" />
+	<bean id="proyectoEntidadTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.proyecto.todo.transfer.ProyectoEntidadTransf" />	
+		
+			
+			
+			
+	<bean id="actividadTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.actividad.todo.transfer.ActividadTransf" />		
+	<bean id="actividadPorPersonalTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.actividad.todo.transfer.ActividadPorPersonalTransf" />			
+	<bean id="objetivoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.actividad.todo.transfer.ObjetivoTransf" />
+	<bean id="entregableTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.actividad.todo.transfer.EntregableTransf" />	
+	<bean id="docObjetivoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.actividad.todo.transfer.DocObjetivoTransf" />
+	<bean id="productoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.actividad.todo.transfer.ProductoTransf" />
+	<bean id="versionActividadTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.actividad.todo.transfer.VersionActividadTransf" />
+	<bean id="versionEntregableTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.actividad.todo.transfer.VersionEntregableTransf" />		
+	<bean id="versionObjetivoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.actividad.todo.transfer.VersionObjetivoTransf" />		
+	<bean id="versionProductoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.actividad.todo.transfer.VersionProductoTransf" />
+	
+	
+	
+
+	
+	<bean id="calendarioNoLaboralTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.calendario.interfaces.transfer.CalendarioNoLaboralTransf" />
+	<bean id="diaNoLaboralTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.calendario.interfaces.transfer.DiaNoLaboralTransf" />
+	
+	
+
+	
+	<bean id="impuestoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.contabilidad.interfaces.transfer.ImpuestoTransf" />
+	<bean id="movimientoContableTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.contabilidad.interfaces.transfer.MovimientoContableTransf" />
+	<bean id="movimientoContableDetalleTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.contabilidad.interfaces.transfer.MovimientoContableDetalleTransf" />	
+	<bean id="pucPorProyectoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.contabilidad.interfaces.transfer.PucPorProyectoTransf" />
+	<bean id="pucTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.contabilidad.interfaces.transfer.PucTransf" />		
+		
+		
+		
+		
+		
+    <bean id="DocEjecucionPresupuestoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.ejecucion.interfaces.transfer.DocEjecucionPresupuestoTransf" /> 	
+	<bean id="ejecucionPresupuestoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.ejecucion.interfaces.transfer.EjecucionPresupuestoTransf" /> 				
+		
+	
+	
+	
+	<bean id="mensajeTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.correspondencia.todo.transfer.MensajeTransf" />
+	<bean id="docMensajeTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.correspondencia.todo.transfer.DocMensajeTransf" />
+	<bean id="destinoMensajeTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.correspondencia.todo.transfer.DestinoMensajeTransf" />
+		
+		
+		
+		
+	<bean id="rubroTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.financiero.todo.transfer.RubroTransf" />	
+	<bean id="rubroProyectoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.financiero.todo.transfer.RubroProyectoTransf" />
+	<bean id="recursoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.financiero.todo.transfer.RecursoTransf" />
+	<bean id="recursoDetalleTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.financiero.todo.transfer.RecursoDetalleTransf" />
+	<bean id="versionRecursoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.financiero.todo.transfer.VersionRecursoTransf" />	
+	
+	
+		
+	
+	
+	
+	<bean id="infInterventorTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.informe.todo.transfer.InformeInterventorTransf" />
+	<bean id="revIntFinTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.informe.todo.transfer.RevInterventorFinTransf" />
+	<bean id="revIntFinDetTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.informe.todo.transfer.RevInterventorFinDetTransf" />
+	<bean id="docInformeTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.informe.todo.transfer.DocInformeTransf" />	
+	<bean id="informeTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.informe.todo.transfer.InformeTransf" />	
+	<bean id="informeDetalleTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.informe.todo.transfer.InformeDetalleTransf" />	
+	<bean id="infoInterEntregableDetalleTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.informe.todo.transfer.InfoInterEntregableDetalleTransf" />	
+	<bean id="infoInterProductoDetalleTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.informe.todo.transfer.InfoInterProductoDetalleTransf" />
+		
+		
+		
+		
+	
+	<bean id="parametroGeneralTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.parametro.interfaces.transfer.ParametroGeneralTransf" />
+	<bean id="parametroPorProyectoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.parametro.interfaces.transfer.ParametroPorProyectoTransf" />	
+		
+		
+		
+		
+	<bean id="cargoPorPersonalTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.personal.interfaces.transfer.CargoPorPersonalTransf" />
+	<bean id="cargoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.personal.interfaces.transfer.CargoTransf" />
+	<bean id="clausulaTipoContratoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.personal.interfaces.transfer.ClausulaTipoContratoTransf" />		
+	<bean id="clausulaContratoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.personal.interfaces.transfer.ClausulaContratoTransf" />		
+    <bean id="contratoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.personal.interfaces.transfer.ContratoTransf" />
+	<bean id="docContratoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.personal.interfaces.transfer.DocContratoTransf" />
+	<bean id="personalTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.personal.interfaces.transfer.PersonalTransf" />		
+			
+			
+			
+			
+	<bean id="terceroPorTipoTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.tercero.interfaces.transfer.TerceroPorTipoTransf" />			
+    <bean id="terceroTransf"
+		class="com.cpcoriente.sgp.springgwt.pro.shared.tercero.interfaces.transfer.TerceroTransf" />			
+		
+		
+		
+		
+		
+		
+		
+			
+</beans>
+

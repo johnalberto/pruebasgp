@@ -1,0 +1,2 @@
+serviceClass: com.cpcoriente.sgp.springgwt.pro.client.entidad.IEntidadServicio
+path: 09282EAA9C7B29EA4C6E472242731AF7.gwt.rpc

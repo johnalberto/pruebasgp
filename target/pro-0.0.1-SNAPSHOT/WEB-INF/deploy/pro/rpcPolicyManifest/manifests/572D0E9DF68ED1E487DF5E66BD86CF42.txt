@@ -1,0 +1,2 @@
+serviceClass: com.cpcoriente.sgp.springgwt.pro.client.permiso.IPermisoServicio
+path: 29944CD94FEDBFE6EBD8306FB3594ADF.gwt.rpc

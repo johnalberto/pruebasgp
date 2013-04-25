@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+	<persistence-unit name="cidecueroPU" transaction-type="RESOURCE_LOCAL">
+		 <provider>org.hibernate.ejb.HibernatePersistence</provider>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.localidad.entity.PaisDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.localidad.entity.DepartamentoDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.localidad.entity.CiudadDO</class>
+			
+			<class>com.cpcoriente.sgp.springgwt.pro.server.entidad.entity.DivisionDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.entidad.entity.EmpresaDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.entidad.entity.EntidadDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.entidad.entity.ActividadEconomicaDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.entidad.entity.ConvocatoriaDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.entidad.entity.TerminoConvocatoriaDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.entidad.entity.DocTerminoConvocatoriaDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.entidad.entity.VersionTerminoConvocatoriaDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.entidad.entity.FotoEntidadDO</class>
+			
+			<class>com.cpcoriente.sgp.springgwt.pro.server.permiso.entity.LogUsuarioDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.permiso.entity.UsuarioDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.permiso.entity.UsuarioPorTipoDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.permiso.entity.UsuarioProyectoEntidadDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.permiso.entity.PermisoDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.permiso.entity.UsuarioEntidadTipoDO</class>
+			
+			
+			<class>com.cpcoriente.sgp.springgwt.pro.server.financiero.entity.RecursoDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.financiero.entity.RecursoDetalleDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.financiero.entity.RubroDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.financiero.entity.RubroDetalleDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.financiero.entity.UnidadDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.financiero.entity.VersionRecursoDO</class>
+			
+			
+			<class>com.cpcoriente.sgp.springgwt.pro.server.actividad.entity.ActividadDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.actividad.entity.ActividadPorPersonalDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.actividad.entity.EntregableDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.actividad.entity.ObjetivoDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.actividad.entity.DocObjetivoDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.actividad.entity.ProductoDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.actividad.entity.VersionActividadDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.actividad.entity.VersionEntregableDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.actividad.entity.VersionObjetivoDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.actividad.entity.VersionProductoDO</class>
+			
+			
+			
+	
+			<class>com.cpcoriente.sgp.springgwt.pro.server.informe.entity.InformeDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.informe.entity.InformeDetalleDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.informe.entity.DocInformeDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.informe.entity.InfoInterEntregableDetalleDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.informe.entity.InfoInterProductoDetalleDO</class>
+			
+			
+			
+			<class>com.cpcoriente.sgp.springgwt.pro.server.calendario.entity.CalendarioNoLaboralDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.calendario.entity.DiaNoLaboralDO</class>
+			
+			
+			
+			<class>com.cpcoriente.sgp.springgwt.pro.server.contabilidad.entity.MovimientoContableDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.contabilidad.entity.MovimientoContableDetalleDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.contabilidad.entity.PucDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.contabilidad.entity.PucPorProyectoDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.contabilidad.entity.ImpuestoDO</class>
+			
+			
+			<class>com.cpcoriente.sgp.springgwt.pro.server.correspondencia.entity.MensajeDO</class>
+			
+			
+			<class>com.cpcoriente.sgp.springgwt.pro.server.ejecucion.entity.EjecucionPresupuestoDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.ejecucion.entity.DocEjecucionPresupuestoDO</class>
+			
+			
+			<class>com.cpcoriente.sgp.springgwt.pro.server.parametro.entity.ParametroGeneralDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.parametro.entity.ParametroPorProyectoDO</class>
+			
+			
+			<class>com.cpcoriente.sgp.springgwt.pro.server.personal.entity.CargoDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.personal.entity.CargoPorPersonalDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.personal.entity.ContratoDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.personal.entity.DocContratoDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.personal.entity.ClausulaTipoContratoDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.personal.entity.ClausulaContratoDO</class>			
+			<class>com.cpcoriente.sgp.springgwt.pro.server.personal.entity.PersonalDO</class>
+			
+			
+			
+			<class>com.cpcoriente.sgp.springgwt.pro.server.proyecto.entity.ContactoProyectoEntidadDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.proyecto.entity.ProyectoDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.proyecto.entity.ProyectoPorEntidadDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.proyecto.entity.TerminoConvocatoriaDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.proyecto.entity.VersionProyectoDO</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.proyecto.entity.VersionTerminoConvocatoriaDO</class>
+			
+			
+			
+			<class>com.cpcoriente.sgp.springgwt.pro.server.tercero.entity.TerceroDO.</class>
+			<class>com.cpcoriente.sgp.springgwt.pro.server.tercero.entity.TerceroPorTipoDO.</class>
+			
+			
+	</persistence-unit>
+</persistence>

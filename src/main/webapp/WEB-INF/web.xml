@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+                         "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+ <!-- Servlets -->
+ <servlet>
+  <servlet-name>localidadServlet</servlet-name>
+  <!--     <servlet-class>com.cpcoriente.cidecuero.springgwt.MrpCrrmM.server.GreetingServiceImpl</servlet-class> -->
+  <servlet-class>com.cpcoriente.sgp.springgwt.pro.server.LocalidadServicioImpl</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>permisoServlet</servlet-name>
+  <!--      <servlet-class>com.cpcoriente.cidecuero.springgwt.MrpCrrmM.server.GreetingServiceImpl</servlet-class>  -->
+  <servlet-class>com.cpcoriente.sgp.springgwt.pro.server.PermisoServicioImpl</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>greetServlet</servlet-name>
+  <!--     <servlet-class>com.cpcoriente.cidecuero.springgwt.MrpCrrmM.server.GreetingServiceImpl</servlet-class> -->
+  <servlet-class>com.cpcoriente.sgp.springgwt.pro.server.EntidadServicioImpl</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>ReportServlet</servlet-name>
+  <display-name>ReportServlet</display-name>
+  <servlet-class>com.cpcoriente.sgp.springgwt.pro.client.report.ReportServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>serialServlet</servlet-name>
+  <servlet-class>com.cpcoriente.sgp.springgwt.pro.client.report.ReportServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>parametroServlet</servlet-name>
+  <servlet-class>com.cpcoriente.sgp.springgwt.pro.server.ParametroServicioImpl</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>localidadServlet</servlet-name>
+  <!--     <url-pattern>/MrpCrrmM/greet</url-pattern> -->
+  <url-pattern>/pro/localidad</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>permisoServlet</servlet-name>
+  <!--     <url-pattern>/MrpCrrmM/greet</url-pattern>  -->
+  <url-pattern>/pro/permiso</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>greetServlet</servlet-name>
+  <!--      <url-pattern>/MrpCrrmM/greet</url-pattern>  -->
+  <url-pattern>/pro/entidad</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>ReportServlet</servlet-name>
+  <url-pattern>/ReportServlet</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>serialServlet</servlet-name>
+  <url-pattern>/pro/serial</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>parametroServlet</servlet-name>
+  <url-pattern>/pro/parametro</url-pattern>
+ </servlet-mapping>
+</web-app>

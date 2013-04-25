@@ -1,0 +1,2 @@
+serviceClass: com.cpcoriente.sgp.springgwt.pro.client.localidad.ILocalidadServicio
+path: 32B2F5B789B58741965EF37869CE6340.gwt.rpc

@@ -1,0 +1,78 @@
+package com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto;
+
+import com.google.gwt.user.client.rpc.SerializationException;
+import com.google.gwt.user.client.rpc.SerializationStreamReader;
+import com.google.gwt.user.client.rpc.SerializationStreamWriter;
+import com.google.gwt.user.client.rpc.impl.ReflectionHelper;
+
+@SuppressWarnings("deprecation")
+public class MovimientoSalidaInvWraperTO_FieldSerializer implements com.google.gwt.user.client.rpc.impl.TypeHandler {
+  private static java.util.Date getFecha(com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO instance) {
+    return (java.util.Date) ReflectionHelper.getField(com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO.class, instance, "fecha");
+  }
+  
+  private static void setFecha(com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO instance, java.util.Date value) 
+  {
+    ReflectionHelper.setField(com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO.class, instance, "fecha", value);
+  }
+  
+  private static java.lang.Long getIdMovimiento(com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO instance) {
+    return (java.lang.Long) ReflectionHelper.getField(com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO.class, instance, "idMovimiento");
+  }
+  
+  private static void setIdMovimiento(com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO instance, java.lang.Long value) 
+  {
+    ReflectionHelper.setField(com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO.class, instance, "idMovimiento", value);
+  }
+  
+  private static java.lang.String getNombreTercero(com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO instance) {
+    return (java.lang.String) ReflectionHelper.getField(com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO.class, instance, "nombreTercero");
+  }
+  
+  private static void setNombreTercero(com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO instance, java.lang.String value) 
+  {
+    ReflectionHelper.setField(com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO.class, instance, "nombreTercero", value);
+  }
+  
+  private static java.lang.String getTipoMovimiento(com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO instance) {
+    return (java.lang.String) ReflectionHelper.getField(com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO.class, instance, "tipoMovimiento");
+  }
+  
+  private static void setTipoMovimiento(com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO instance, java.lang.String value) 
+  {
+    ReflectionHelper.setField(com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO.class, instance, "tipoMovimiento", value);
+  }
+  
+  public static void deserialize(SerializationStreamReader streamReader, com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO instance) throws SerializationException {
+    setFecha(instance, (java.util.Date) streamReader.readObject());
+    setIdMovimiento(instance, (java.lang.Long) streamReader.readObject());
+    setNombreTercero(instance, streamReader.readString());
+    setTipoMovimiento(instance, streamReader.readString());
+    
+  }
+  
+  public static com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO instantiate(SerializationStreamReader streamReader) throws SerializationException {
+    return new com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO();
+  }
+  
+  public static void serialize(SerializationStreamWriter streamWriter, com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO instance) throws SerializationException {
+    streamWriter.writeObject(getFecha(instance));
+    streamWriter.writeObject(getIdMovimiento(instance));
+    streamWriter.writeString(getNombreTercero(instance));
+    streamWriter.writeString(getTipoMovimiento(instance));
+    
+  }
+  
+  public Object create(SerializationStreamReader reader) throws SerializationException {
+    return com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO_FieldSerializer.instantiate(reader);
+  }
+  
+  public void deserial(SerializationStreamReader reader, Object object) throws SerializationException {
+    com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO_FieldSerializer.deserialize(reader, (com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO)object);
+  }
+  
+  public void serial(SerializationStreamWriter writer, Object object) throws SerializationException {
+    com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO_FieldSerializer.serialize(writer, (com.cpcoriente.cidecuero.springgwt.MrpCrrmM.shared.inventario.objeto.MovimientoSalidaInvWraperTO)object);
+  }
+  
+}

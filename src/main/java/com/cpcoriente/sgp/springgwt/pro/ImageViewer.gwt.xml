@@ -1,0 +1,8 @@
+<module rename-to='pro'>
+	<inherits name="com.google.gwt.user.User"/>
+	<inherits name="com.google.gwt.i18n.I18N"/>
+	<inherits name="com.google.gwt.user.theme.standard.Standard"/>
+	<entry-point class="com.cpcoriente.sgp.springgwt.pro.client.ImageViewer"/>
+	<source path='client'/>
+  <source path='shared'/>
+</module>

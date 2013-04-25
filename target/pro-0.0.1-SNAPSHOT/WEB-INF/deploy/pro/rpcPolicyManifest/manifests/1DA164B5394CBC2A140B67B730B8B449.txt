@@ -1,0 +1,2 @@
+serviceClass: com.cpcoriente.sgp.springgwt.pro.client.parametro.IParametroServicio
+path: 7F6117A81F136E3E4108C349356A8A08.gwt.rpc
