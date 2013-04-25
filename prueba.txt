@@ -1,7 +1,8 @@
 prueba de documento
 prueba de 2
-<<<<<<< HEAD
+
 PRUEBA 3
-=======
+
 PRUEBA78
->>>>>>> origin/master
+
+prueba 48
